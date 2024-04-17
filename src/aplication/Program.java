@@ -9,6 +9,7 @@ import java.util.Scanner;
 import model.entitis.Reservation;
 
 public class Program {
+	// este é muito ruim por implementar a logica de válidação aqui, na classe principal
 
 	public static void main(String[] args) throws ParseException {// parseEx... é posto quando o metodo pode lançar uma exceção
 		Scanner sc = new Scanner(System.in);

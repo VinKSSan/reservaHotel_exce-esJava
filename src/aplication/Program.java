@@ -9,7 +9,7 @@ import java.util.Scanner;
 import model.entitis.Reservation;
 
 public class Program {
-
+	//é ruim por pela semântica prejudicial, método retornando string, com lógica estruturada em condicionais aninhadas 
 	public static void main(String[] args) throws ParseException {// parseEx... é posto quando o metodo pode lançar uma exceção
 		Scanner sc = new Scanner(System.in);
 		Locale.setDefault(Locale.US);
@@ -24,7 +24,7 @@ public class Program {
 		System.out.println("Check-out date (dd/MM/yyyy) ");
 		Date checkout = sdf.parse(sc.next());
 		
-		if(!checkout.after(checkin)) {
+		if(!checkout.after(checkin)) {//aqui já é uma validação imprópria, que deveria ser posta no construtor do reservation
 			System.out.println("Error in reservation: Check-out date must be after check-in date");
 		}
 		else {
@@ -41,15 +41,13 @@ public class Program {
 			System.out.print("Check-out date (dd/MM/yyyy) ");
 			checkout = sdf.parse(sc.next());
 			
-			Date now = new Date();
-			if (checkin.before(now) || checkout.before(now)) {
-				System.out.println("Error in reservation: Reservation dates for update must be future dates");
+			
+			
+			String error = reservation.updateDates(checkin, checkout);
+			if(error!=null) {
+				System.out.println("error in reservation: " + error);
 			}
-			else if(!checkout.after(checkin)) {
-				System.out.println("Error in reservation: Check-out date must be after check-in date");
-			} 
 			else {
-				reservation.updateDates(checkin, checkout);
 				System.out.println("Reservation, " + reservation);
 			}
 		}

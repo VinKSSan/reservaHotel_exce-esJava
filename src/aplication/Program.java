@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entitis.Reservation;
+import model.exceptions.DomainException;
 
 public class Program {
 
@@ -37,13 +38,13 @@ public class Program {
 			System.out.print("Check-out date (dd/MM/yyyy) ");
 			checkout = sdf.parse(sc.next());
 		
-			reservation.updateDates(checkin, checkout);
+			reservation.updateDates(checkin, checkout); //(Atent) Aqui teriamos um erro se não tratace-mos a exceção propagada em Reservatio.updateDates metodo
 			System.out.println("Reservation, " + reservation);		
 		}
 		catch(ParseException e) {
 			System.out.println("invalid date format");
 		}
-		catch(IllegalArgumentException e) {//neste exemplo criamos uma exceção pronta do java
+		catch(DomainException e) {//tratemos a exceção propagada em Reservatio.updateDates metodo. neste exemplo criamos uma exceção personalizada, 
 			System.out.println("Error in reservation: "+e.getMessage());
 		}
 		

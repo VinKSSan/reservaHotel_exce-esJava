@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import model.exceptions.DomainException;
+
 public class Reservation {
 	private Integer roomNumber;
 	private Date checkin;
@@ -31,13 +33,13 @@ public class Reservation {
 		return checkout;
 	}
 	
-	public void updateDates(Date checkin, Date checkout) {
+	public void updateDates(Date checkin, Date checkout) throws DomainException{//(Atent)como a exceção será tratada na classe principal, aqui podemos propagar
 		Date now = new Date();
 		if(checkin.before(now) || checkout.before(now)) {
-			throw new IllegalArgumentException("Reservation dates for update must be future dates"); 
+			throw new DomainException("Reservation dates for update must be future dates"); 
 		}
 		if(!checkout.after(checkin)) {
-			throw new IllegalArgumentException("Check-out date must be after check-in date"); // tecnica para instaciar exceções
+			throw new DomainException("Check-out date must be after check-in date"); // tecnica para instaciar exceções
 		}
 		
 		this.checkin = checkin;

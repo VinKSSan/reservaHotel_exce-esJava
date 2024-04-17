@@ -13,7 +13,7 @@ public class Reservation {
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	//deve ser statico para que não seja instãnciado um novo para cada objt reservation 
-	public Reservation(Integer roomNumber, Date checkin, Date checkout) throws DomainException {
+	public Reservation(Integer roomNumber, Date checkin, Date checkout)  {//não somos obrigados a tratar a exceção (RuntimeException)
 		if(!checkout.after(checkin)) {// tratando a exceção logo no começo, programação defênciva
 			throw new DomainException("Check-out date must be after check-in date"); // tecnica para instaciar exceções
 		}
@@ -35,7 +35,7 @@ public class Reservation {
 		return checkout;
 	}
 	
-	public void updateDates(Date checkin, Date checkout) throws DomainException{//(Atent)como a exceção será tratada na classe principal, aqui podemos propagar
+	public void updateDates(Date checkin, Date checkout) {//não somos obrigados a tratar a exceção (RuntimeException)
 		Date now = new Date();
 		if(checkin.before(now) || checkout.before(now)) {
 			throw new DomainException("Reservation dates for update must be future dates"); 

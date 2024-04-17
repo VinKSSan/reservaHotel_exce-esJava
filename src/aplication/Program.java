@@ -47,7 +47,9 @@ public class Program {
 		catch(DomainException e) {//tratemos a exceção propagada em Reservatio.updateDates metodo. neste exemplo criamos uma exceção personalizada, 
 			System.out.println("Error in reservation: "+e.getMessage());
 		}
-		
+		catch(RuntimeException e ) {//tratando qualquer tipo gerenérico de execeção (famoso erro inesperado)
+			System.out.println("erro inesperado: "+ e);
+		}
 		
 		
 		sc.close();

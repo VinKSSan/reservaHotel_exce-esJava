@@ -13,8 +13,10 @@ public class Reservation {
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	//deve ser statico para que não seja instãnciado um novo para cada objt reservation 
-	public Reservation(Integer roomNumber, Date checkin, Date checkout) {
-		super();
+	public Reservation(Integer roomNumber, Date checkin, Date checkout) throws DomainException {
+		if(!checkout.after(checkin)) {// tratando a exceção logo no começo, programação defênciva
+			throw new DomainException("Check-out date must be after check-in date"); // tecnica para instaciar exceções
+		}
 		this.roomNumber = roomNumber;
 		this.checkin = checkin;
 		this.checkout = checkout;
